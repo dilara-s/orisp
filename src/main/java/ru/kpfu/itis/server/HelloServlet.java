@@ -10,11 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @WebServlet("")
 public class HelloServlet extends HttpServlet {
+
+    private static final Logger LOG  = Logger.getLogger(LoginServlet.class.getName());
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOG.info("Handling GET request");
+
         HttpClientImpl client = new HttpClientImpl();
         String url = "https://jsonplaceholder.typicode.com/posts?";
 
@@ -28,10 +34,14 @@ public class HelloServlet extends HttpServlet {
 
         resp.setContentType("application/json");
         resp.getWriter().write(response);
+
+        LOG.info("GET request handled successfully");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOG.info("Handling POST request");
+
         HttpClientImpl client = new HttpClientImpl();
         String url = "https://jsonplaceholder.typicode.com/posts";
 
@@ -50,10 +60,14 @@ public class HelloServlet extends HttpServlet {
 
         resp.setContentType("application/json");
         resp.getWriter().write(response);
+
+        LOG.info("POST request handled successfully");
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOG.info("Handling PUT request");
+
         HttpClientImpl client = new HttpClientImpl();
         String url = "https://jsonplaceholder.typicode.com/posts/1";
 
@@ -69,10 +83,14 @@ public class HelloServlet extends HttpServlet {
 
         resp.setContentType("application/json");
         resp.getWriter().write(response);
+
+        LOG.info("PUT request handled successfully");
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOG.info("Handling DELETE request");
+
         HttpClientImpl client = new HttpClientImpl();
         String url = "https://jsonplaceholder.typicode.com/posts/1";
 
@@ -82,5 +100,7 @@ public class HelloServlet extends HttpServlet {
         Map<String, String> data = new HashMap<>();
 
         System.out.println(client.delete(url, headers, data));
+
+        LOG.info("DELETE request handled successfully");
     }
 }
